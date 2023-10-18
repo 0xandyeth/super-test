@@ -10,3 +10,8 @@ export type OptionType ={
    value:string,
    label:string
 } 
+
+export type StepType={
+    value:Number,
+    label:string,
+}

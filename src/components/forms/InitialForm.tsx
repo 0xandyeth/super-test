@@ -9,11 +9,11 @@ const InitialForm:React.FC<InitialFormProps>=()=>{
     <Container>
         <Wrap>
            <Title>Username</Title>
-           <InputBox placeholder='Username'/>
+           <InputBox placeholder='Input username'/>
         </Wrap>
         <Wrap>
            <Title>Email</Title>
-           <InputBox placeholder='Email'/>
+           <InputBox placeholder='Input email'/>
         </Wrap>
         <Wrap>
             <Title>Country</Title>
@@ -30,7 +30,7 @@ const Wrap = styled.div`
    display: block;
    justify-content: center;
    text-align: left;
-   margin-top: 20px;
+   margin-top: 30px;
 `
 const Title =styled.p`
  padding-bottom: 10px;
@@ -42,6 +42,7 @@ const Title =styled.p`
 const InputBox = styled.input`
   width: 360px;
   height: 40px;
+  padding: 10px;
   gap: 8px;
   outline: none;
   border: none;

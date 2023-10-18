@@ -24,7 +24,7 @@ const Wrap = styled.div`
   border-radius: 20px;
   width: 400px;
   height: 452px;
-  padding: 20px 20px 40px 20px;
+  padding: 10px 20px 40px 20px;
   position: relative;
   display: flex;
   justify-content: center;

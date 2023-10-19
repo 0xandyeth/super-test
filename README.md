@@ -8,7 +8,6 @@
 # Project Structure #
   - src
     -Index.tsx
-        - App.tsx
             - Home.tsx
                  - Header.tsx
                  - Wizard.tsx

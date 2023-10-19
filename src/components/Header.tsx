@@ -6,14 +6,24 @@ interface HeaderProps{
 const Header:React.FC<HeaderProps>=({headTxt})=>{
   return(
     <Container>
+      <Wrap>
       <Content>Super test form</Content>
       <SubContent>{headTxt}</SubContent>
+      </Wrap>
+     
     </Container>  
   )
 }
 
 const Container = styled.div`
   margin-top: 80px;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+`
+const Wrap = styled.div`
+   display: block;
+   text-align: center;
 `
 const Content = styled.p`
   font-weight: 500;

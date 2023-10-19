@@ -3,6 +3,7 @@ export type UserInfoType={
     name:string,
     email:string,
     password:string,
+    confirmPass:string,
     country:string,
 }
 

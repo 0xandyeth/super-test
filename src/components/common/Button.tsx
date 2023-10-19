@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-interface ButtonProps {}
-const Button: React.FC<ButtonProps> = () => {
-  return <CustomBtn disabled={true}>Continue</CustomBtn>;
+import { StepType } from '../../constants/types';
+interface ButtonProps {
+    btnTxt:string
+    hanldeMoveStep:()=>void
+    step:StepType
+}
+const Button: React.FC<ButtonProps> = (props) => {
+    const {btnTxt,hanldeMoveStep,step} = props
+  return <CustomBtn disabled={false} onClick={()=>hanldeMoveStep()}>{btnTxt}</CustomBtn>;
 };
 const CustomBtn = styled.button`
   position: absolute;
@@ -19,10 +25,11 @@ const CustomBtn = styled.button`
   line-height: 29.05px;
   border-radius: 4px;
   transition: all 1s ease 0s;
-  &:disabled{
+  color: #413C5F;
+  /* &:disabled{
       background-color: #A39FC1;
       border: none;
-  }
+  } */
   
 `;
 export default Button;

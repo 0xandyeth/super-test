@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 interface HeaderProps{
-
+  headTxt:string
 };
-const Header:React.FC<HeaderProps>=()=>{
+const Header:React.FC<HeaderProps>=({headTxt})=>{
   return(
     <Container>
       <Content>Super test form</Content>
-      <SubContent>Inital info</SubContent>
+      <SubContent>{headTxt}</SubContent>
     </Container>  
   )
 }

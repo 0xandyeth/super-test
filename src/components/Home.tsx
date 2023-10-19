@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Form from './Form';
@@ -6,10 +6,11 @@ interface HomeProps{
 
 }
 const Home:React.FC<HomeProps>=()=>{
+  const [headTxt,setHeadTxt] = useState('Inital info');
   return(
     <Container>
-      <Header/>
-      <Form/>
+      <Header headTxt={headTxt} />
+      <Form setHeadTxt={setHeadTxt}/>
     </Container>  
   )
 }

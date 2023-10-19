@@ -15,4 +15,5 @@ export type OptionType ={
 export type StepType={
     value:Number,
     label:string,
+    check:boolean
 }

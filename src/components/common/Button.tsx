@@ -5,10 +5,11 @@ interface ButtonProps {
     btnTxt:string
     hanldeMoveStep:()=>void
     step:StepType
+    check:boolean
 }
 const Button: React.FC<ButtonProps> = (props) => {
-    const {btnTxt,hanldeMoveStep,step} = props
-  return <CustomBtn disabled={false} onClick={()=>hanldeMoveStep()}>{btnTxt}</CustomBtn>;
+    const {btnTxt,hanldeMoveStep,step,check} = props
+  return <CustomBtn disabled={check} onClick={()=>hanldeMoveStep()}>{btnTxt}</CustomBtn>;
 };
 const CustomBtn = styled.button`
   position: absolute;
@@ -26,10 +27,10 @@ const CustomBtn = styled.button`
   border-radius: 4px;
   transition: all 1s ease 0s;
   color: #413C5F;
-  /* &:disabled{
+  &:disabled{
       background-color: #A39FC1;
       border: none;
-  } */
+  }
   
 `;
 export default Button;

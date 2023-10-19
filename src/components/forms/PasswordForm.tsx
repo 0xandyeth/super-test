@@ -1,14 +1,34 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { UserInfoType } from '../../constants/types';
+import { isConfirmVaild, isPasswordVaild } from '../../constants/utils';
+import ErrorText from '../common/ErrorText';
 interface PasswordFormProps {
   userInfo: UserInfoType;
   setUserInfo: (userInfo: UserInfoType) => void;
 }
 const PasswordForm: React.FC<PasswordFormProps> = (props) => {
   const { userInfo, setUserInfo } = props;
+  const [errors, setErrors] = useState<UserInfoType>({
+    name: '',
+    email: '',
+    password: '',
+    confirmPass: '',
+    country: '',
+  });
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    let errorMessage = '';
+    if (e.target.name === 'password') {
+      if (!isPasswordVaild(e.target.value)) {
+        errorMessage = 'Password must be 8-16 characters.';
+      }
+    } else {
+      if (!isConfirmVaild(userInfo.password, e.target.value)) {
+        errorMessage = 'Passwords do not match.';
+      }
+    }
+    setErrors({ ...errors, [e.target.name]: errorMessage });
   };
   return (
     <Container>
@@ -21,8 +41,11 @@ const PasswordForm: React.FC<PasswordFormProps> = (props) => {
             onChange={handleInputChange}
             type='password'
           />
-          <img src='/images/error.png' alt='Error' />
+          {errors.password !== '' && (
+            <img src='/images/error.png' alt='Error' />
+          )}
         </WrapInput>
+        <ErrorText errorMessage={errors.password} />
       </Wrap>
       <Wrap>
         <Title>Repeat password</Title>
@@ -33,8 +56,11 @@ const PasswordForm: React.FC<PasswordFormProps> = (props) => {
             type='password'
             onChange={handleInputChange}
           />
-          <img src='/images/error.png' alt='Error' />
+          {errors.confirmPass !== '' && (
+            <img src='/images/error.png' alt='Error' />
+          )}
         </WrapInput>
+        <ErrorText errorMessage={errors.confirmPass} />
       </Wrap>
     </Container>
   );

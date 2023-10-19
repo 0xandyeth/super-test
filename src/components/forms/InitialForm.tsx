@@ -1,15 +1,41 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import DropDown from '../common/DropDown';
-import { UserInfoType } from '../../constants/types';
+import { OptionType, UserInfoType } from '../../constants/types';
+import ErrorText from '../common/ErrorText';
+import { isEmailValid, isNameValid } from '../../constants/utils';
 interface InitialFormProps {
   userInfo: UserInfoType;
   setUserInfo: (userInfo: UserInfoType) => void;
 }
 const InitialForm: React.FC<InitialFormProps> = (props) => {
   const { userInfo, setUserInfo } = props;
+  const [errors, setErrors] = useState<UserInfoType>({
+    name: '',
+    email: '',
+    password: '',
+    confirmPass: '',
+    country: '',
+  });
+
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    let errorMessage = '';
+    if (e.target.name === 'name') {
+      if (!isNameValid(e.target.value)) {
+        errorMessage = 'Username must be 4-12 characters.';
+      }
+    } else {
+      if (!isEmailValid(e.target.value)) {
+        errorMessage = 'Please enter a valid email.';
+      }
+    }
+    setErrors({ ...errors, [e.target.name]: errorMessage });
+  };
+  const handleDropChange = (option: OptionType | null) => {
+    console.log(option);
+    setUserInfo({ ...userInfo, country: option ? option.value : '' });
   };
   return (
     <Container>
@@ -20,9 +46,11 @@ const InitialForm: React.FC<InitialFormProps> = (props) => {
             name='name'
             placeholder='Input username'
             onChange={handleInputChange}
+            type='text'
           />
-          <img src='/images/error.png' alt='Error' />
+          {errors.name !== '' && <img src='/images/error.png' alt='Error' />}
         </WrapInput>
+        <ErrorText errorMessage={errors.name} />
       </Wrap>
       <Wrap>
         <Title>Email</Title>
@@ -31,13 +59,15 @@ const InitialForm: React.FC<InitialFormProps> = (props) => {
             name='email'
             placeholder='Input email'
             onChange={handleInputChange}
+            type='text'
           />
-          <img src='/images/error.png' alt='Error' />
+          {errors.email !== '' && <img src='/images/error.png' alt='Error' />}
         </WrapInput>
+        <ErrorText errorMessage={errors.email} />
       </Wrap>
       <Wrap>
         <Title>Country</Title>
-        <DropDown />
+        <DropDown handleDropChange={handleDropChange} />
       </Wrap>
     </Container>
   );

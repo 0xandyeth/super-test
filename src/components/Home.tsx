@@ -1,16 +1,40 @@
-import React,{useState} from 'react';
+import React,{useCallback, useState} from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Form from './Form';
+import Wizard from './Wizard';
+import {Steps} from '../constants/utils';
+import { StepType } from '../constants/types';
 interface HomeProps{
 
 }
 const Home:React.FC<HomeProps>=()=>{
   const [headTxt,setHeadTxt] = useState('Inital info');
+  const [steps,setSteps] = useState<StepType[]>(Steps);
+  console.log("home steps",steps)
+
+  const handleStepChange = (stepId: Number) => {
+    const updatedSetps = steps.map((step:StepType) => {
+      if (step.value === stepId) {
+        return {
+          ...step,
+          check: true,
+        };
+      }else{
+        return {
+            ...step,
+            check:false
+        }
+      }
+    });
+    setSteps(updatedSetps);
+    console.log("count", updatedSetps)
+  };
   return(
     <Container>
       <Header headTxt={headTxt} />
-      <Form setHeadTxt={setHeadTxt}/>
+      <Wizard steps={steps} />
+      <Form setHeadTxt={setHeadTxt} handleStepChange={handleStepChange} steps={steps}/>
     </Container>  
   )
 }

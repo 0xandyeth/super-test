@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { OptionType } from '../../constants/types';
-interface DropDownProps {}
+interface DropDownProps {
+    handleDropChange:(option:OptionType | null)=>void
+}
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
   { value: 'vanilla', label: 'Vanilla' },
 ];
-const DropDown: React.FC<DropDownProps> = () => {
+const DropDown: React.FC<DropDownProps> = ({handleDropChange}) => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleChange = (selectedOption: OptionType | null) => {
-    setSelectedOption(selectedOption)
+    setSelectedOption(selectedOption);
+    handleDropChange(selectedOption)
   };
   return (
     <Select

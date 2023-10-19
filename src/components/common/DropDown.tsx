@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import Select from 'react-select';
 import { OptionType } from '../../constants/types';
 import axios from 'axios';

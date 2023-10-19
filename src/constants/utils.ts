@@ -2,7 +2,7 @@ import { StepType, UserInfoType } from './types';
 export function isValidUser(userInfo: UserInfoType) {
   const valid =
     userInfo.name !== '' && userInfo.email !== '' && userInfo.country !== '';
-  return valid ? true : false;
+  return valid && isNameValid(userInfo.name) && isEmailValid(userInfo.email)  ? true : false;
 }
 
 export function isValidPass(userInfo: UserInfoType) {

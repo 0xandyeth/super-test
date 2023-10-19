@@ -35,7 +35,7 @@ const InitialForm: React.FC<InitialFormProps> = (props) => {
   };
   const handleDropChange = (option: OptionType | null) => {
     console.log(option);
-    setUserInfo({ ...userInfo, country: option ? option.value : '' });
+    setUserInfo({ ...userInfo, country: option ? option.label : '' });
   };
   return (
     <Container>

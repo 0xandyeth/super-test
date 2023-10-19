@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { OptionType } from '../../constants/types';
+import axios from 'axios';
+
 interface DropDownProps {
     handleDropChange:(option:OptionType | null)=>void
 }
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+
 const DropDown: React.FC<DropDownProps> = ({handleDropChange}) => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
+  const [countries,setCountries] = useState([]);
+  
+  useEffect(() => {
+    // Fetch the list of countries from the Rest Countries API
+    axios.get('https://restcountries.com/v3.1/all')
+      .then((response) => {
+        // Extract the data from the response
+        const countryData = response.data;
+        // Map the data to an array of objects with label and value properties
+        const countryOptions = countryData.map((country:any) => ({
+          value: country.cca2, 
+          label: country.name.common,
+        }));
 
+        // Set the list of countries in the state
+        setCountries(countryOptions);
+      })
+      .catch((error) => {
+        console.error('Error fetching country data:', error);
+      });
+  }, []);
   const handleChange = (selectedOption: OptionType | null) => {
     setSelectedOption(selectedOption);
     handleDropChange(selectedOption)
@@ -22,7 +40,7 @@ const DropDown: React.FC<DropDownProps> = ({handleDropChange}) => {
       value={selectedOption}
       defaultValue={selectedOption}
       onChange={handleChange}
-      options={options}
+      options={countries}
       placeholder='Select country'
       components={{
         IndicatorSeparator: () => null,

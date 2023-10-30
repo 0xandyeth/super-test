@@ -89,7 +89,7 @@ const Borrow: React.FC<LoanFormInitialFormProps> = (props) => {
   return (
     <Container>
       <Wrap>
-        <Title>목적대상없이 대부하기</Title>
+        <Title>목적대상없이 대부하기 100USDT</Title>
       </Wrap>
       <Wrap>
         <Title>실행상태보기</Title>

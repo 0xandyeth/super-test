@@ -9,7 +9,7 @@ interface HomeProps{
 
 }
 const Home:React.FC<HomeProps>=()=>{
-  const [headTxt,setHeadTxt] = useState('Inital info');
+  const [headTxt,setHeadTxt] = useState('');
   const [steps,setSteps] = useState<StepType[]>(Steps);
   console.log("home steps",steps)
 
@@ -33,7 +33,7 @@ const Home:React.FC<HomeProps>=()=>{
   return(
     <Container>
       <Header headTxt={headTxt} />
-      <Wizard steps={steps} />
+      {/* <Wizard steps={steps} /> */}
       <Form setHeadTxt={setHeadTxt} handleStepChange={handleStepChange} steps={steps}/>
     </Container>  
   )

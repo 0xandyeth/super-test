@@ -7,7 +7,7 @@ const Header:React.FC<HeaderProps>=({headTxt})=>{
   return(
     <Container>
       <Wrap>
-      <Content>Super test form</Content>
+      <Content>FlashLoan</Content>
       <SubContent>{headTxt}</SubContent>
       </Wrap>
      

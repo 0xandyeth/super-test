@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Button from './common/Button';
 import InitialForm from './forms/InitialForm';
 import PasswordForm from './forms/PasswordForm';
+import LoanForm from './forms/LoanForm';
+import LoanData from './forms/LoanData';
 import { StepType, UserInfoType } from '../constants/types';
 import ReviewForm from './forms/ReviewForm';
 import { isValidUser, isValidPass } from '../constants/utils';
@@ -77,14 +79,11 @@ const Form: React.FC<FormProps> = (props) => {
   };
   return (
     <Container>
-      <Wrap value={step.value}>
-        {renderSwitch(step.value)}
-        <Button
-          btnTxt={btnTxt}
-          hanldeMoveStep={hanldeMoveStep}
-          step={step}
-          check={check}
-        />
+      <Wrap >
+        <LoanForm/>
+      </Wrap>
+      <Wrap >
+        <LoanData/>
       </Wrap>
     </Container>
   );
@@ -93,6 +92,7 @@ const Form: React.FC<FormProps> = (props) => {
 const Container = styled.div`
   width: 100%;
   display: flex;
+  gap:50px;
   justify-content: center;
 `;
 const Wrap = styled.div`
@@ -100,8 +100,7 @@ const Wrap = styled.div`
   border-radius: 20px;
   padding: 0px 20px 40px 20px;
   width: 400px;
-  height: ${(props: any) =>
-    props.value === 1 ? '452px' : props.value === 2 ? '348px' : '276px'};
+  height:452px;
   position: relative;
   display: flex;
   overflow: hidden;

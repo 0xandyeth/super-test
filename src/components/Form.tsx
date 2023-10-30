@@ -8,6 +8,7 @@ import LoanData from './forms/LoanData';
 import { StepType, UserInfoType } from '../constants/types';
 import ReviewForm from './forms/ReviewForm';
 import { isValidUser, isValidPass } from '../constants/utils';
+import Borrow from './forms/Borrow';
 interface FormProps {
   setHeadTxt: (txt: string) => void;
   handleStepChange: (stepId: Number) => void;
@@ -79,6 +80,9 @@ const Form: React.FC<FormProps> = (props) => {
   };
   return (
     <Container>
+       <Wrap >
+        <Borrow/>
+      </Wrap>
       <Wrap >
         <LoanForm/>
       </Wrap>

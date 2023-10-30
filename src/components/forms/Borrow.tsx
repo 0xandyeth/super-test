@@ -90,6 +90,9 @@ const Borrow: React.FC<LoanFormInitialFormProps> = (props) => {
     <Container>
       <Wrap>
         <Title>목적대상없이 대부하기 100USDT</Title>
+        <a href='https://polygonscan.com/address/0x99df3926e0f1ac43c39f0855aaf36dd27c679453' target='_blank'>
+          <Title1>콘트랙보기</Title1>
+        </a>
       </Wrap>
       <Wrap>
         <Title>실행상태보기</Title>
@@ -135,6 +138,13 @@ const Wrap = styled.div`
 const Title = styled.p`
   padding-bottom: 10px;
   color: white;
+  font-weight: 400;
+  line-height: 16px;
+  font-size: 14px;
+`;
+const Title1 = styled.p`
+  padding-bottom: 10px;
+  color: red;
   font-weight: 400;
   line-height: 16px;
   font-size: 14px;

@@ -10,7 +10,8 @@ import Button from '../common/Button';
 import useEther from 'src/hooks/useEther';
 import useFlash from 'src/hooks/useFlash';
 import { AbiItem, toWei } from 'web3-utils'
-
+import useBorrow from 'src/hooks/useBorrow';
+import ReactLoading from 'react-loading';
 interface WindowChain {
   ethereum?: any
 }
@@ -41,7 +42,7 @@ const Borrow: React.FC<LoanFormInitialFormProps> = (props) => {
   } = useWeb3React();
 
   const { getEtherBalance ,etherAmount} = useEther();
-  const {onFlash} = useFlash();
+  const {onFlash} = useBorrow();
   useEffect(() => {
     if (!!account) {
       const getWalletInfo = async () => {
@@ -78,7 +79,7 @@ const Borrow: React.FC<LoanFormInitialFormProps> = (props) => {
   const flashRun = async()=>{
     if(Array.isArray(tokens) && Array.isArray(amounts)){
        if(tokens.length !==0 && amounts.length !==0){
-        const transaction =   await onFlash(tokens,amounts,"0x");
+        const transaction =   await onFlash(["0xc2132D05D31c914a87C6611C10748AEb04B58e8F"],[100000000],"0x");
         setTransaction(transaction);
        }
     
@@ -106,7 +107,16 @@ const Borrow: React.FC<LoanFormInitialFormProps> = (props) => {
         {!active ? (
           <CustomBtn onClick={() => connectWallet()}>련결</CustomBtn>
         ) : (
-          <CustomBtn onClick={() => flashRun()}>실행</CustomBtn>
+          <div>
+              {
+                transaction !==null?(
+                  <ReactLoading  height={667} width={375} />
+                ):(
+                  <CustomBtn onClick={() => flashRun()}>실행</CustomBtn>
+                )
+              }
+          </div>
+          
         )}
       </Wrap>
     </Container>
